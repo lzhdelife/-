@@ -1,3 +1,27 @@
+# 论文项目
+
+
+
+```bash
+sudo git clone https://github.com/lzhdelife/CrosSCLR.git /home/lzh/Project/CrosSCLR --progress
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # python venv
 
 **创建虚拟环境**：
@@ -5,7 +29,7 @@
 在终端中，导航到项目目录，然后运行以下命令来创建虚拟环境：
 
 ```bash
-python -m venv venv_name
+python -m venv .venv
 ```
 
 这将在当前目录创建一个名为 `venv_name` 的虚拟环境。
@@ -15,13 +39,13 @@ python -m venv venv_name
 在 Linux 和 macOS 上：
 
 ```bash
-source venv_name/bin/activate
+source .venv/bin/activate
 ```
 
 在 Windows 上：
 
 ```bash
-venv_name\Scripts\activate
+.venv\Scripts\activate
 ```
 
 当虚拟环境激活时，终端提示符会显示虚拟环境名称，表示你现在正在虚拟环境中工作。
@@ -54,8 +78,6 @@ deactivate
 
 **自动生成requirement.txt**
 
-在激活的虚拟环境中，使用以下命令生成requirements.txt文件：
-
 ```bash
 pip freeze > requirements.txt
 ```
@@ -81,15 +103,73 @@ docker images
 
 
 
+## docker run/exec
+
+show the containers whether the container Up or Exited
+
+```bash
+docker ps -a
+```
+
+output:
+
+```
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS                    PORTS                      NAMES
+7e1f930cdc16   ubuntu                            "/bin/bash"              23 hours ago     Up 36 seconds
+                    vigilant_cerf
+608d2791fc5f   ubuntu                            "/bin/bash"              23 hours ago     Up 22 hours
+                    cranky_curie
+```
+
+交互式运行容器
+
+```bash
+docker exec -it 7e1f930cdc16 /bin/bash
+```
+
+
+
 ## docker python
 
 
 
-build your image
+docker 是分层的，python镜像底层是Linux系统，
+
+以下命令可以进入 python 镜像底层的Linux系统
 
 ```bash
-docker build -t welcome-to-docker .
+docker exec -it 容器名 /bin/bash
 ```
+
+进入这个Linux后，进入python环境，打印python安装路径，即可看到python安装在哪里
+
+```shell
+root@5964dfb7a22e:/# python3
+Python 3.11.4 (main, Jul 28 2023, 05:02:22) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> print(sys.executable)	// 打印python安装路径
+/usr/local/bin/python3
+```
+
+也可以打印操作系统名称版本等
+
+```bash
+root@WorkPC:~# docker exec -it 5964dfb7a22e python3
+Python 3.11.4 (main, Jul 28 2023, 05:02:22) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import platform
+>>> print(platform.system())
+Linux
+>>> print(platform.release())
+5.15.90.1-microsoft-standard-WSL2
+```
+
+
+
+
+
+## 给docker传输文件
 
 
 
@@ -130,6 +210,12 @@ sudo passwd root
 
 
 
+## vscode远程连接
+
+ssh lzh@115.236.153.177 -p 35035
+
+
+
 ## linux 基础命令
 
 复制
@@ -156,6 +242,8 @@ chmod +x your_script_name.sh
 
 ```bash
 tar -xzvf myfiles.tar.gz
+
+unzip your_archive.zip
 ```
 
 
@@ -195,17 +283,58 @@ http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 
 ## 决策树
 
+### Graphviz安装及使用-决策树可视化
+
+https://zhuanlan.zhihu.com/p/268532582
+
+除了pip install graphviz，还要从官网下载graphviz并配置环境变量
+
+还需要在代码里加入
+
+```python
+import graphviz
+import os 
+# 以下这两行是手动进行环境变量配置，防止在本机的环境变量部署失败 
+os.environ['PATH'] = os.pathsep + 'D:\\Graphviz\\bin' 
+```
+
+
+
+
+
 决策树CART 代价复杂度剪枝
 
 https://blog.csdn.net/WANGWUSHAN/article/details/108556371
 
-dd
+
 
 鸢尾花多分类
 
 https://blog.csdn.net/sunxmwebstudy/article/details/112967313
 
 https://blog.csdn.net/lys_828/article/details/122045161
+
+## 模型导出
+
+你可以使用以下命令来安装独立的`joblib`库：
+
+```python
+pip install joblib
+```
+
+一旦你安装了独立的`joblib`库，你可以使用它来导出和加载`scikit-learn`模型，就像我之前提到的那样。以下是使用外部`joblib`库版本导出和加载模型的示例代码：
+
+```python
+import joblib
+
+# 导出模型
+joblib.dump(model, 'model_filename.pkl')
+
+# 加载模型
+loaded_model = joblib.load('model_filename.pkl')
+```
+
+
 
 ## 数据处理
 
@@ -221,11 +350,93 @@ https://blog.csdn.net/lys_828/article/details/122045161
 
 
 
-## pandas
+# pandas
 
-### pandas 统计
+## 统计
 
 https://blog.csdn.net/qq_18351157/article/details/105993752
+
+
+
+某一列单一元素
+
+```python
+column = 'groupsid'
+groupsid_list = df_manager[column].unique().tolist()
+# print(groupsid_list)
+```
+
+
+
+## 读写文件
+
+读文件
+
+```python
+column_names = ['Column1', 'Column2', 'Column3']
+df = pd.read_csv('your_file.csv', header=None, names=column_names)
+```
+
+
+
+```python
+input_file = 'TS_MARKTOOLS_GROUPTARGET.csv'
+df = pd.read_csv(input_file)
+loc_list = ['disknum','groupid', 'actualtime', 'property', 'longitude','latitude', 'height', 'speed', 'course']
+df_group = df.loc[:, loc_list]
+```
+
+写文件
+
+```python
+filename = 'df_group_select.csv'
+# 将 DataFrame 写入 CSV 文件
+df_group.to_csv(filename, index=False)
+```
+
+
+
+## 增删改查
+
+增加
+
+```python
+# 添加一列 disknum = 'dc51cfe41bda4eadaed0a7c6254a3a9e'
+df_cluster['disknum'] = 'dc51cfe41bda4eadaed0a7c6254a3a9e'
+```
+
+
+
+定值筛选，排序，重置序号
+
+```python
+condition = df_group['disknum'] == disknum
+df_group = df_group[condition]
+df_group = df_group.sort_values('actualtime').reset_index(drop = True)
+```
+
+范围筛选
+
+```python
+# 选择groupsid 在 groupid_list 中的数据
+groupsid_filter = df_label['groupsid'].isin(groupsid_list)
+df_label = df_label[groupsid_filter].reset_index(drop=True)
+```
+
+
+
+## 遍历
+
+```python
+for index, row in df_newtable.iterrows():
+    # Access data in specific columns for the current row
+    column1_value = row['column1']
+    column2_value = row['column2']
+```
+
+
+
+
 
 
 
