@@ -20,6 +20,8 @@ https://developer.aliyun.com/article/1209367
  sudo firewall-cmd --list-ports
 ```
 
+
+
 # 内网穿透
 
 NPS
@@ -29,6 +31,67 @@ NPS
 https://youtu.be/jdVQQQacPj4?si=c6wj9VGfnFm4MYRa
 
 [内网穿透服务器搭建教程，带WEB管理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/485703115)
+
+
+
+买一个有公网IP的服务器
+
+在NPS官网下载服务端和客户端
+
+https://github.com/ehang-io/nps/releases
+
+<img src="image\1712411889827.jpg" alt="下载地址" style="zoom:50%;" />
+
+
+
+查处理器架构
+
+```bash
+uname --machine
+```
+
+在购买的有公网IP的服务器上下载server
+
+在内网中的服务器上下载client
+
+剩下的看官方教程
+
+### 阿里云开放端口
+
+1.在安全组中添加
+
+https://developer.aliyun.com/article/1209367
+
+2.在服务器中开放
+
+```bash
+ sudo systemctl status firewalld
+ udo systemctl start firewalld
+ sudo firewall-cmd --zone=public --add-port=8025/tcp --permanent
+ sudo firewall-cmd --reload
+ sudo firewall-cmd --list-ports
+```
+
+### 项目中用到的端口介绍
+
+8080：服务端管理页面的端口
+
+8024：服务端暴露给客户端，与客户端连接的端口
+
+8025（自定义）：服务端暴露在外，ssh远程访问的端口
+
+因此，ssh连接 公网IP:8025，即可访问到 内网IP:22
+
+
+
+ssh连接
+
+```bash
+ssh -p 8025 dell@8.134.251.252
+# 登录 8.134.251.252:8025  账号 dell 密码 admin
+```
+
+
 
 # 论文项目
 
