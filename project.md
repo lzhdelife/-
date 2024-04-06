@@ -1,3 +1,35 @@
+# 阿里云
+
+8.134.251.252(公)
+
+172.23.12.171(私有)
+
+### 开放端口
+
+1.在安全组中添加
+
+https://developer.aliyun.com/article/1209367
+
+2.在服务器中开放
+
+```bash
+ sudo systemctl status firewalld
+ udo systemctl start firewalld
+ sudo firewall-cmd --zone=public --add-port=8025/tcp --permanent
+ sudo firewall-cmd --reload
+ sudo firewall-cmd --list-ports
+```
+
+# 内网穿透
+
+NPS
+
+教程
+
+https://youtu.be/jdVQQQacPj4?si=c6wj9VGfnFm4MYRa
+
+[内网穿透服务器搭建教程，带WEB管理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/485703115)
+
 # 论文项目
 
 
@@ -10,7 +42,21 @@ sudo git clone https://github.com/lzhdelife/CrosSCLR.git /home/lzh/Project/CrosS
 
 
 
+# OpenAI
 
+国内连API
+
+https://zhuanlan.zhihu.com/p/655954134
+
+
+
+## python server
+
+```bash
+python -m http.server
+python -m http.server PORT
+
+```
 
 
 
@@ -81,6 +127,100 @@ deactivate
 ```bash
 pip freeze > requirements.txt
 ```
+
+
+
+
+
+# WSL
+
+```bash
+wsl --install
+```
+
+重启电脑后，搞一个账号和密码
+
+WSL Docker
+
+## Git
+
+```bash
+git config --global user.name "lzhdelife"
+
+git config --global user.email "lzhdelife@163.com"
+```
+
+1. **检查是否已经存在 SSH 密钥**：
+
+   在终端中运行以下命令来检查是否已经存在 SSH 密钥：
+
+   ```
+   bashCopy code
+   ls -al ~/.ssh
+   ```
+
+   如果您看到 `id_rsa` 和 `id_rsa.pub` 这样的文件，则表示您已经拥有 SSH 密钥。
+
+2. **生成 SSH 密钥**：
+
+   如果您在上一步中没有找到 SSH 密钥，可以通过运行以下命令来生成一个新的 SSH 密钥：
+
+   ```
+   cssCopy code
+   ssh-keygen -t rsa -b 4096 -C "lzhdelife@163.com"
+   ```
+
+   在此命令中，将 `your_email@example.com` 替换为您在 GitHub 上注册的电子邮件地址。一路按回车键，直到完成密钥生成过程。
+
+3. **将 SSH 公钥添加到 GitHub 帐户**：
+
+   打开 `id_rsa.pub` 文件并复制其中的内容。您可以使用文本编辑器打开该文件，如 Vim 或 Nano。
+
+   ```
+   vi .ssh/id_rsa.pub
+   ```
+
+   然后，登录到您的 GitHub 帐户，导航到 "Settings" -> "SSH and GPG keys" -> "New SSH key"，将复制的公钥粘贴到 "Key" 字段中并保存。
+
+4. **测试 SSH 连接**：
+
+   运行以下命令来测试您的 SSH 连接是否成功：
+
+   ```
+   cssCopy code
+   ssh -T git@github.com
+   ```
+
+   如果一切顺利，您应该会看到一条消息，确认您已成功连接到 GitHub。
+
+
+
+## Python WSL
+
+wsl 里的 python 需要写为 python3
+
+打印python路径
+
+```
+lzhdelife@lzhdelife:~$ python3 -c "import sys; print(sys.executable)"
+/usr/bin/python3
+```
+
+
+
+**安装pip**
+
+接下来是安装pip： `sudo apt install python3-pip`
+
+然后遇到了这个报错：E: Package 'python3-pip' has no installation candidate
+
+我按照【2】的解决办法，首先运行命令：sudo apt-get update
+
+然后再运行命令：sudo apt-get upgrade
+
+然后再重新执行命令：`sudo apt install python3-pip`
+
+然后就成功运行安装了pip。
 
 
 
