@@ -32,6 +32,7 @@ https://youtu.be/jdVQQQacPj4?si=c6wj9VGfnFm4MYRa
 
 [内网穿透服务器搭建教程，带WEB管理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/485703115)
 
+https://post.smzdm.com/p/a07md2nr/
 
 
 买一个有公网IP的服务器
