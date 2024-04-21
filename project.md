@@ -1,3 +1,128 @@
+# PyTorch
+
+搭建环境
+
+https://blog.csdn.net/wyf2017/article/details/118676765
+
+环境配置细节
+
+[Conda虚拟环境](https://blog.csdn.net/fs1341825137/article/details/109681541)
+
+[jupyter server](https://blog.csdn.net/fs1341825137/article/details/109683965)
+
+```bash
+source /home/lzh/anaconda3/etc/profile.d/conda.sh
+
+conda create -n pytorch-test
+
+conda activate pytorch-test
+```
+
+
+To list all existing Anaconda virtual environments, you can use the following command in your terminal or command prompt:
+
+```
+bashCopy code
+conda env list
+```
+
+
+
+## jupyter
+
+ipykernel 是 jupyter 的一种内核
+
+ipykernel 或者 jupyter可以安装在conda虚拟环境下
+
+
+
+检查ipykernel是在哪个conda环境下
+
+在 Linux 终端中
+
+```bash
+conda activate deeplearning	# xian
+jupyter kernelspec list
+```
+
+在 jupyter notebook 中
+
+```python
+import sys
+sys.executable
+```
+
+
+
+### conda install jupyter 和 conda install ipykernel的区别
+
+`conda install jupyter` 和 `conda install ipykernel` 有一些区别，尽管它们都与 Jupyter 相关联：
+
+1. **安装范围**：
+   - `conda install jupyter`：安装了整个 Jupyter 套件，包括 Jupyter Notebook、JupyterLab、Jupyter Console 等。
+   - `conda install ipykernel`：只安装了 Jupyter 的 IPython 内核（ipykernel），它是 Jupyter 笔记本和 JupyterLab 的后端引擎之一。
+2. **功能**：
+   - `conda install jupyter`：安装了 Jupyter 的完整功能，包括创建、编辑和运行 Jupyter 笔记本，以及在 JupyterLab 中进行更高级的交互式计算和数据分析。
+   - `conda install ipykernel`：安装了 IPython 内核，允许您在 Jupyter 笔记本中运行 Python 代码。
+3. **依赖关系**：
+   - `conda install jupyter`：会安装 Jupyter 所需的所有依赖项，包括 IPython 内核和其他相关包。
+   - `conda install ipykernel`：只会安装 IPython 内核，不包含其他 Jupyter 组件。
+
+通常情况下，如果您希望在 Jupyter 笔记本中使用 Python 内核，则只需要安装 `ipykernel`。但如果您希望使用完整的 Jupyter 套件，包括 JupyterLab 等，则需要安装 `jupyter`。
+
+
+
+# SSH
+
+ssh -p 39709 lzh@115.236.153.170
+
+ssh -p 8025 lzh@8.134.251.252
+
+ssh -p 22 root@8.134.251.252
+
+
+
+## 配置ssh免密登录
+
+本地访问远程服务器
+
+本地用户路径 下 `.ssh/` 下有文件`id_rsa.pub`，将此文件的内容复制到
+
+远程服务器`~/.ssh/authorized_keys`文件中
+
+如果没有这个文件，则手动创建
+
+1. **Create the `.ssh` directory (if it doesn't exist)**:
+
+   ```
+   bashCopy code
+   mkdir -p ~/.ssh
+   ```
+
+2. **Create the `authorized_keys` file**:
+
+   ```
+   bashCopy code
+   touch ~/.ssh/authorized_keys
+   ```
+
+3. **Set appropriate permissions**:
+
+   ```
+   bashCopy codechmod 700 ~/.ssh
+   chmod 600 ~/.ssh/authorized_keys
+   ```
+
+4. **Paste your public key into the `authorized_keys` file**:
+
+   Open the `id_rsa.pub` file, copy its contents, and paste it into `~/.ssh/authorized_keys`.
+
+5. **Save the file**.
+
+接下来本地就可以免密ssh登录远程服务器了
+
+
+
 # 阿里云
 
 8.134.251.252(公)
@@ -209,7 +334,6 @@ WSL Docker
 
 ```bash
 git config --global user.name "lzhdelife"
-
 git config --global user.email "lzhdelife@163.com"
 ```
 
@@ -324,6 +448,43 @@ CONTAINER ID   IMAGE                             COMMAND                  CREATE
                     cranky_curie
 ```
 
+
+
+## docker run
+
+以下是 `docker run` 命令中使用的参数的简要介绍：
+
+1. `-d` 或 `--detach`：
+   - 后台运行容器，即使您退出终端也能保持运行。
+2. `--name <容器名称>`：
+   - 为容器指定一个名称。
+3. `-v <本地目录>:<容器目录>`：
+   - 挂载一个本地目录到容器中，使容器内的数据可以持久化保存到本地文件系统上。本地目录与容器目录之间用冒号分隔。
+4. `-p <主机端口>:<容器端口>`：
+   - 将主机上的端口映射到容器中。主机端口与容器端口之间用冒号分隔。
+5. `<镜像名称>`：
+   - 要运行的容器的镜像名称。
+
+现在，让我将这些参数应用到您的具体情况中：
+
+```
+bashCopy codedocker run -d \
+  --name download \
+  -v ./data:/data \
+  -p 7860:7860 \
+  <download_image_name>
+```
+
+- `-d`：后台运行容器。
+- `--name download`：为容器指定名称为 "download"。
+- `-v ./data:/data`：将当前目录下的 "data" 目录挂载到容器内的 "/data" 目录。
+- `-p 7860:7860`：将主机的端口 7860 映射到容器的端口 7860。
+- `<download_image_name>`：要运行的容器的镜像名称。
+
+您需要将 `<download_image_name>` 替换为您下载服务的实际镜像名称。
+
+
+
 交互式运行容器
 
 ```bash
@@ -370,6 +531,12 @@ Linux
 
 
 
+## 删除容器
+
+```bash
+docker rm <容器ID1> <容器ID2> <容器ID3> ...
+```
+
 
 
 ## 给docker传输文件
@@ -409,9 +576,29 @@ sudo passwd root
 
 
 
-查IP
+## vi/vim
 
 
+
+## ssh
+
+### 检查ssh是否安装
+
+在 Ubuntu 或者 Debian 上，你可以运行以下命令检查 OpenSSH 软件包是否已安装：
+
+```
+bashCopy code
+dpkg -l | grep openssh-server
+```
+
+如果软件包已安装，你会看到类似以下输出：
+
+```
+cssCopy code
+ii  openssh-server          [版本号]          amd64        secure shell (SSH) server, for secure access from remote machines
+```
+
+如果没有安装 OpenSSH 软件包，你将不会看到任何输出。
 
 ## vscode远程连接
 
@@ -569,6 +756,17 @@ groupsid_list = df_manager[column].unique().tolist()
 # print(groupsid_list)
 ```
 
+group by 统计
+
+```python
+category_stat = df['category'].value_counts()
+print(category_stat)
+type_stat = df['type'].value_counts()
+print(type_stat)
+actionway = df['actionway'].value_counts()
+print(actionway)
+```
+
 
 
 ## 读写文件
@@ -624,6 +822,31 @@ df_group = df_group.sort_values('actualtime').reset_index(drop = True)
 # 选择groupsid 在 groupid_list 中的数据
 groupsid_filter = df_label['groupsid'].isin(groupsid_list)
 df_label = df_label[groupsid_filter].reset_index(drop=True)
+```
+
+删除
+
+```python
+# 删除['category', 'type', 'actionway']列中含有空值的行
+df = df.dropna(subset=['category', 'type', 'actionway']).reset_index()
+
+
+# 如果你希望删除所有列中含有空值的行，可以简单地使用下面的语句
+df = df.dropna()
+
+```
+
+
+
+## group by
+
+每个组取一行数据
+
+```python
+column_name = 'groupsid'
+grouped = df.groupby(column_name)
+# 获取每个组的第一行数据
+df = grouped.first().reset_index()
 ```
 
 
@@ -782,6 +1005,62 @@ Label是Group数据的标签，但这两种数据在不同表中，且较难对�
 1、先划分集群类别，
 
 2、先根据
+
+
+
+# MySQL
+
+**安装**
+
+**MySQL 未安装**：如果 MySQL 尚未安装在系统上，则不会有相应的服务单元。你可以尝试安装 MySQL 服务器。在大多数 Linux 发行版上，可以使用包管理器来安装 MySQL。例如，在 Ubuntu 上，你可以使用以下命令安装 MySQL：
+
+```
+bashCopy codesudo apt-get update
+sudo apt-get install mysql-server
+```
+
+**修改密码**
+
+1. 使用以下命令登录到 MySQL 服务器：
+
+   ```
+   bashCopy code
+   sudo mysql
+   ```
+
+2. 登录后，执行以下命令更改 root 用户的密码：
+
+   ```
+   sqlCopy code
+   ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
+   ```
+
+   在这里，`new_password` 应该是你要设置的新密码。
+
+3. 重启 MySQL 服务以应用更改：
+
+   ```
+   bashCopy code
+   sudo systemctl restart mysql
+   ```
+
+**查状态**
+
+**MySQL 服务器未运行**：首先确保 MySQL 服务器正在运行。你可以使用以下命令检查 MySQL 服务器的状态：
+
+```
+bashCopy code
+systemctl status mysql
+```
+
+如果 MySQL 服务器未运行，你可以使用以下命令启动它：
+
+```
+bashCopy code
+systemctl start mysql
+```
+
+
 
 
 
