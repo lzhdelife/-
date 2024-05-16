@@ -19,11 +19,34 @@ conda activate pytorch-test
 ```
 
 
-To list all existing Anaconda virtual environments, you can use the following command in your terminal or command prompt:
+
+conda虚拟环境list
 
 ```
 bashCopy code
 conda env list
+```
+
+
+
+安装pytorch
+
+https://blog.csdn.net/Friedrichor/article/details/127721828
+
+检验 PyTorch 安装成功
+在终端依次输入 python，import torch，torch.__version__，torch.cuda.is_available()，就可以检验 PyTorch 是否安装成功，并可查看版本号等等。
+
+```bash
+(pytorch) kfh@amax:~$ python  # 进入python环境
+Python 3.9.13 (main, Oct 13 2022, 21:15:33) 
+[GCC 11.2.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch   # 输入并按回车后只要不报错就说明pytorch已经安装成功了
+>>> torch.__version__  # 查看 PyTorch 版本号
+>>> '1.12.1'
+>>> torch.cuda.is_available()  # 查看 CUDA 即 GPU 是否可用
+>>> True
+>>> exit()
 ```
 
 
@@ -166,7 +189,9 @@ https://post.smzdm.com/p/a07md2nr/
 
 https://github.com/ehang-io/nps/releases
 
-<img src="image\1712411889827.jpg" alt="下载地址" style="zoom:50%;" />
+![image-20240423112030786](project.assets/image-20240423112030786.png)
+
+
 
 
 
@@ -235,17 +260,58 @@ zerotier，免费组网
 sudo git clone https://github.com/lzhdelife/CrosSCLR.git /home/lzh/Project/CrosSCLR --progress
 ```
 
+NTURGB-D数据集
+
+⭐⭐⭐⭐https://github.com/shahroudy/NTURGB-D
+
+可视化
+
+知乎：https://zhuanlan.zhihu.com/p/486866468
+
+CSDN：https://blog.csdn.net/weixin_43863869/article/details/121713885
+
+“ NTU RGB + D”和“ NTU RGB + D 120”。
+“ NTU RGB + D”包含60个动作类别和56,880个视频样本。
+“ NTU RGB + D 120”通过添加另外60类和另外57,600个视频样本来扩展“ NTU RGB + D”，即“ NTU RGB + D 120”总共有120类和114,480个样本。
+这两个数据集都包含每个样本的RGB视频，深度图序列，3D骨骼数据和红外（IR）视频。每个数据集由三台Kinect V2摄像机同时捕获。
+RGB视频的分辨率为1920x1080，深度图和IR视频的分辨率均为512x424，并且3D骨骼数据包含每帧25个人体关节的3D坐标。
+
+原文链接：https://blog.csdn.net/weixin_42684418/article/details/105710110
+
+![在这里插入图片描述](project.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjY4NDQxOA==,size_16,color_FFFFFF,t_70.png)
+
+![在这里插入图片描述](project.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjY4NDQxOA==,size_16,color_FFFFFF,t_70-17138426202533.png)
+
+## 对比式自监督学习
+
+embedding space解释
+在对比式自监督学习中，"embedding space" 是指将数据样本映射到的一个向量空间。在这个空间中，每个样本被表示为一个向量，这个向量被设计成能够捕捉样本之间的相似性和差异性。
+
+对比式自监督学习通常会尝试通过学习将相似的样本映射到接近的向量，而将不相似的样本映射到远离的向量。这种学习的目的是使得在 embedding space 中，同一类别的样本之间的距离尽可能小，而不同类别的样本之间的距离尽可能大。
+
+在这个空间中，可以使用各种距离或相似度度量来衡量样本之间的相似性，比如欧氏距离、余弦相似度等。通常，这个空间的维度比原始数据的维度要低，因为经过特征提取和降维等操作，将数据投影到更紧凑、更具区分性的空间中。
+
+
+
+embedding similarity，嵌入相似度理解
+
+在对比式自监督学习中，"embedding similarity" 指的是样本在嵌入空间中的相似度。当我们把数据样本映射到一个低维的嵌入空间时，我们希望相似的样本在这个嵌入空间中更接近，而不相似的样本则更远离。
+
+嵌入相似度通常通过计算嵌入向量之间的距离或相似度来衡量。一般来说，距离越小、相似度越大表示样本之间越相似。
+
+常用的计算嵌入相似度的方法包括：
+
+1. **欧氏距离（Euclidean Distance）**：两个向量之间的直线距离。
+2. **余弦相似度（Cosine Similarity）**：两个向量之间的夹角余弦值。
+3. **曼哈顿距离（Manhattan Distance）**：两个向量之间的城市街区距离。
+4. **马氏距离（Mahalanobis Distance）**：考虑了数据的协方差矩阵的距离。
+
+在对比式自监督学习中，我们通常会根据嵌入相似度来定义损失函数，使得相似的样本在嵌入空间中更接近，而不相似的样本则更远离。这有助于学习到更好的特征表示，以便于后续任务的处理。
 
 
 
 
-# OpenAI
-
-国内连API
-
-https://zhuanlan.zhihu.com/p/655954134
-
-
+# Python
 
 ## python server
 
@@ -256,16 +322,7 @@ python -m http.server PORT
 ```
 
 
-
-
-
-
-
-
-
-
-
-# python venv
+## python venv
 
 **创建虚拟环境**：
 
@@ -327,7 +384,78 @@ pip freeze > requirements.txt
 
 
 
+# Git
 
+https://blog.csdn.net/m0_48651355/article/details/120646834?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-120646834-blog-88870257.pc_relevant_multi_platform_whitelistv4&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-120646834-blog-88870257.pc_relevant_multi_platform_whitelistv4&utm_relevant_index=1
+
+
+
+## 创建本地仓库并上传到github
+
+```bash
+git init //把这个目录变成Git可以管理的仓库
+git add README.md //文件添加到仓库
+git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 
+git commit -m "first commit" //把文件提交到仓库
+git remote add origin git@github.com:lzhdelife/Weekly_Report.git //关联远程仓库
+git push -u origin master //把本地库的所有内容推送到远程库上
+```
+
+
+
+更改后上传GitHub
+
+```bash
+git status -s  // 查状态
+git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 
+git commit -m "first commit" //把文件提交到仓库
+// git remote add origin git@github.com:lzhdelife/Weekly_Report.git 
+//代码从远程clone下来，相当于已经关联远程仓库，不需要再次关联
+git push -u origin master //把本地库的所有内容推送到远程库上
+```
+
+
+
+做出一些更改（测试）
+
+
+
+## 详解git push -u origin main
+
+`git push -u origin main` 是将本地分支 `main` 推送到远程仓库的命令，并且使用 `-u` 或 `--set-upstream` 参数来设置本地分支与远程分支的跟踪关系。
+
+具体解释如下：
+
+- `git push`: 这是 Git 命令，用于将本地分支的提交推送到远程仓库。
+- `-u` 或 `--set-upstream`: 这是一个选项参数，用于设置本地分支与远程分支的跟踪关系。通过使用 `-u` 参数，Git 会将本地分支与指定的远程分支关联起来，以便在以后的推送中，您只需使用 `git push` 命令即可。
+- `origin`: 这是远程仓库的名称。在这种情况下，`origin` 是一个常用的远程仓库名称，它通常用于指代您的远程仓库地址。
+- `main`: 这是本地分支的名称。在这个例子中，假设您的本地分支名为 `main`，您将该分支的提交推送到远程仓库。
+
+执行 `git push -u origin main` 命令后，Git 将会将您的本地分支 `main` 的提交推送到名为 `origin` 的远程仓库，并将 `main` 分支与远程仓库的同名分支建立关联。这样，以后您只需使用 `git push` 命令即可将更改推送到远程仓库。
+
+请注意，根据您的项目设置和远程仓库的默认分支名称，您可能需要将 `main` 替换为您实际使用的本地分支名称，例如 `master`。确保在运行命令之前，将命令中的分支名称替换为您要推送的实际分支名称。
+
+
+
+## git add  和 git commit 很繁琐，有简化办法吗
+
+是的，Git 提供了一些简化办法来减少 `git add` 和 `git commit` 的繁琐。以下是两种常用的简化方法：
+
+1. 使用 `git commit -a`：如果您已经对文件进行了修改并希望将所有修改一次性提交，可以使用 `-a` 选项来跳过 `git add` 步骤。这会将所有已修改的文件自动添加到暂存区并进行提交。请注意，这仅适用于已经被 Git 跟踪的文件。
+
+   ```shell
+   git commit -a -m "提交消息"
+   ```
+
+2. 使用 `git commit -am`：如果您只修改了已被 Git 跟踪的文件，并且不需要在提交之前将新文件添加到暂存区，可以使用 `-am` 选项将修改和提交合并到一个步骤中。
+
+   ```shell
+   git commit -am "提交消息"
+   ```
+
+这些简化方法可以减少手动执行 `git add` 的步骤，但请注意，它们并不适用于新增的未被 Git 跟踪的文件。对于新文件，仍然需要先使用 `git add` 将其添加到暂存区，然后再使用 `git commit` 进行提交。
+
+尽管这些简化方法可以提高效率，但请确保在提交前仔细检查您的更改，以确保只提交您希望包含在每个提交中的内容。
 
 # WSL
 
@@ -569,7 +697,7 @@ docker rm <容器ID1> <容器ID2> <容器ID3> ...
 
 
 
-# 服务器
+# Linux
 
 用户：dell	密码：admin
 
@@ -638,14 +766,66 @@ chmod +x your_script_name.sh
 
 ### 解压
 
-
+tar解压
 ```bash
 tar -xzvf myfiles.tar.gz
-
+```
+zip 解压
+```bash
 unzip your_archive.zip
 ```
 
+`unzip` 命令用于解压缩 zip 文件。下面是一些常用的 `unzip` 参数：
 
+1. `-d <目标目录>`：指定解压缩的目标目录。
+
+   ```
+   bash
+   Copy code
+   unzip example.zip -d /path/to/destination
+   ```
+
+2. `-l`：列出压缩文件中的内容列表，但不进行解压缩。
+
+   ```
+   bash
+   Copy code
+   unzip -l example.zip
+   ```
+
+## 端口检查
+
+要检查 Ubuntu 上的端口是否被占用，可以使用 `netstat` 或 `lsof` 命令。以下是检查端口是否被占用的步骤：
+
+1. 使用 `netstat` 命令：
+
+```
+bash
+Copy code
+netstat -tuln | grep <端口号>
+```
+
+如果端口被占用，将显示相关信息，包括 PID（进程ID）。
+
+1. 使用 `lsof` 命令：
+
+```
+bash
+Copy code
+sudo lsof -i:<端口号>
+```
+
+如果端口被占用，将显示哪个进程正在使用该端口。
+
+一旦确定端口被占用并且知道了相关的进程ID，您可以使用 `kill` 命令结束该进程。例如：
+
+```
+bash
+Copy code
+sudo kill <进程ID>
+```
+
+请确保使用 `sudo` 以管理员权限运行这些命令，以便访问必要的信息和执行相应的操作。
 
 
 
@@ -1130,115 +1310,11 @@ select distinct owner from all_objects # 查看当前用户
 
 ## 约束
 
-
-
-
-
 values ('bc04e29c0fd04be6a7087284334ef3b1', '64eb83e9545c4fcfa181d9c99268f4db', '8370', '2', '1', '116.04972222222223', '301', '350', '356.576721', '飞机编队', 'f4a9aedd-1ef4-45ca-ae29-bb90fae524f3', '未知', '1', '1', '未知天气', '2025/07/02 01:35:51', '60094', 'f4a9aedd-1ef4-45ca-ae29-bb90fae524f3', '白方', 'f4a9aedd-1ef4-45ca-ae29-bb90fae524f3', '17.74000000000001');
 insert into TS_MARKTOOLS_GROUPTARGET (dataidid, disknum, groupid, attribute, armtype, longitude, height, speed, course, name, type, task, combineflag, objnum, weather, wartime, actualtime, property, views, members, latitude)
 
 
 
-# 文献阅读
-
-### 轨迹聚类
-
-[1]王世辉,祝永新,汪辉等.融合运动轨迹特征的多模态群体行为识别方法[J].微电子学与计算机,2021,38(11):7-13.DOI:10.19304/J.ISSN1000-7180.2021.0341.
-
-https://kns.cnki.net/KXReader/Detail?invoice=jEILzj%2Ff%2FjDedkUku5peU%2FOb5SCGv4JXmNjlndcmTIiuDDg1p95nzjKBvg%2FDCE7FghG5E98NtcGfuDPzRVwJz6JuH%2FnwTrSweMf0RqwRYB6d4%2BWzfCBz7fjPPMqp7HXICmLGtfojjBWwTj32DalJ7%2Fh1cGa545KmAEnc%2BlMV3NU%3D&DBCODE=CJFD&FileName=WXYJ202111002&TABLEName=cjfdlast2021&nonce=22E17CC9DEBF4550936F4E6D7506DDF5&uid=&TIMESTAMP=1678424642813
-
-计算机兵棋作战实体轨迹聚类算法
-
-https://kns.cnki.net/kcms2/article/abstract?v=3uoqIhG8C44YLTlOAiTRKgchrJ08w1e7xAZywCwkEEKIMEv2UBdFuHSD7ZKUS9Ye5namngcM7FQFOZwNHR-HBCglP6drbw97&uniplatform=NZKPT
+## 
 
 
-
-目前基于LSTM的群体行为识别无法充分挖掘个体间在群体层面时空特征的问题，提出一种基于LSTM-Transformer的群体-个体时空特征融合群体行为识别模型。
-
-
-
-## 轨迹聚类
-
-[2]万宜春,陈志龙,何昌其等.基于时空和作战编组的兵棋推演系统**轨迹聚类算法**[J].指挥控制与仿真,2023,45(01):108-118.
-
-https://kns.cnki.net/kcms2/article/abstract?v=3uoqIhG8C44YLTlOAiTRKibYlV5Vjs7ioT0BO4yQ4m_mOgeS2ml3UE_FPa9d0ApOiAkzC0UWIic-Qg0gxbWyGsMVIyh3iyxA&uniplatform=NZKPT
-
-该算法分为轨迹压缩、相似性度量、轨迹线段聚类和可视化4个部分
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230310132206036.png" alt="image-20230310132206036" style="zoom:33%;" />
-
-
-
-相似性度量：空间、时间、编队、轨迹相似度
-
-轨迹线段聚类：使用DPC聚类算法
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230310134308787.png" alt="image-20230310134308787" style="zoom:33%;" />
-
-
-
-
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230310132936759.png" alt="image-20230310132936759" style="zoom:33%;" />
-
-从CTUW算法的轨迹聚类效果来看，能够实现轨迹线段的聚类，并且在可视化表现上能够为代表轨迹赋予关联棋子总称和时间信息，能够支持机动态势的动态展示。
-
-
-
-
-
-
-
-## 数据处理
-
-使用navicat 15打开sql文件并转为csv文件，再使用python处理csv文件中的数据
-
-Pandas 是 Python 语言的一个扩展程序库，用于数据分析。
-
-标注好的数据
-
-![image-20230324132223957](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324132223957.png)
-
-点集数据
-
-![image-20230324132256350](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324132256350.png)
-
-
-
-## 实例分割
-
-语义分割是对图像中的每个像素划分出对应的类别,实现像素级别的分类.根据图1(a)需要划分的类别标签,在图1(b)中,将图中的“瓶子”、“杯子”、“立方体”实现像素级别的分类.
-
-实例分割实在语义分割的基础上，进一步分割已划分类别的具体对象，即分割出实例。实例分割与语义分割的不同之处在于,不仅要进行像素级别的分类,还需在具体类别基础上区分出不同个体.这也对分割算法提出了更高的要求.如图1(c)所示,在语义分割的基础之上不仅要分割出“瓶子”和“杯子”两个类,还要用不同的颜色区分同属一类的不同“立方体”实例。
-
-![image-20230324112721436](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324112721436.png)
-
-实例分割（Instance Segmentation）既具备语义分割（Semantic Segmentation）的特点，需要做到**像素层面上的分类**，也具备目标检测（Object Detection）的一部分特点，即**需要定位出不同实例，即使它们是同一种类**。
-
-实例分割的研究有两条线
-
-**自上而下的实例分割方法**
-
-思路是：首先通过目标检测的方法**找出实例所在的区域**（bounding box），再**在检测框内进行语义分割**，每个分割结果都作为一个不同的实例输出。
-
-**自下而上的实例分割方法**
-
-思路是：首先进行像素级别的语义分割，再通过聚类、度量学习等手段区分不同的实例。这种方法虽然保持了更好的低层特征（细节信息和位置信息）
-
-
-
-实际上也就是先分群再分类，或者先分类再分群。与本项目相似，区别在于大部分实例分割案例是对图像作处理，而本项目是对数据点作处理。
-
-
-
-### 基于深度学习的图像实例分割技术
-
-![image-20230324131800050](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324131800050.png)
-
-
-
-![image-20230324131435779](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324131435779.png)
-
-目标检测
-
-![image-20230324130901348](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230324130901348.png)
