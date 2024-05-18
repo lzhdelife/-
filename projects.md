@@ -1,3 +1,31 @@
+# Windows for Android
+
+视频教程
+
+https://www.youtube.com/watch?v=UDS0VCA38XY&ab_channel=%E5%A4%A9%E5%A4%A9%E7%A7%91%E6%8A%80%E6%95%99%E5%AD%A6
+
+
+
+下载地址：
+
+安卓子系统下载地址：https://github.com/MustardChef/WSABuilds
+
+备用下载地址：
+https://github.com/MustardChef/WSABuilds/releases/download/Windows_11_2307.40000.6.0/WSA_2307.40000.6.0_x64_Release-Nightly-MindTheGapps-13.0-RemovedAmazon.7z
+
+*请将“备用下载地址”复制到迅雷下载，速度可能会更快。
+如果网站打不开，或者下载速度很慢，请换个时间再下载。
+
+### 注意事项
+
+1.打开Developer mode，才能安装应用
+
+![image-20240518235520465](projects.assets/image-20240518235520465.png)
+
+2.使用WSATools安装Clash的apk文件，翻墙后才能登录谷歌
+
+
+
 # 爬虫
 
 https://github.com/NanmiCoder/MediaCrawler
