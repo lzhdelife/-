@@ -1,3 +1,71 @@
+# Linux维修
+
+按 F12 进入启动选项
+
+<img src="projects.assets/image-20240531161730534.png" alt="image-20240531161730534" style="zoom: 33%;" />
+
+UEFI BOOT：ubuntu启动
+
+按`shift`可以进入grub管理界面
+
+选择 recovery
+
+grub管理界面，可以打开`Terminal`
+
+打开终端后
+
+重启网络
+
+```bash
+sudo systemctl restart NetworkManager
+ip a
+ping baidu.com
+```
+
+
+
+
+
+# WSL
+
+网络
+
+NAT
+
+
+
+
+
+# VNC
+
+
+
+![image-20240527204933096](projects.assets/image-20240527204933096.png)
+
+Remote-Java-Corner-People
+
+教程
+
+https://blog.csdn.net/qq_63320529/article/details/134506820
+
+192.168.31.144:5900
+
+# 无线主机，电脑音频视频
+
+参考投影仪
+
+HDMI日常速率
+
+
+
+抖音直播速率：20Mbps
+
+讲解高清流畅直播间所需带宽，从视频音频编码讲起，好文
+
+https://zhuanlan.zhihu.com/p/461802189
+
+
+
 # Windows for Android
 
 视频教程
@@ -28,12 +96,84 @@ https://github.com/MustardChef/WSABuilds/releases/download/Windows_11_2307.40000
 
 # 爬虫
 
+## 微博爬虫|
+
+https://github.com/nghuyong/WeiboSpider
+
+```
+│  LICENSE
+│  README.md
+│  requirements.txt
+│
+├─.github
+│      cookie.png
+│      weibospider.png
+│
+└─weibospider
+    │  cookie.txt
+    │  middlewares.py
+    │  pipelines.py
+    │  run_spider.py
+    │  settings.py
+    │
+    └─spiders
+            comment.py
+            common.py
+            fan.py
+            follower.py
+            repost.py
+            tweet_by_keyword.py
+            tweet_by_tweet_id.py
+            tweet_by_user_id.py
+            user.py
+            __init__.py
+
+```
+
+
+
+
+
+## 社交媒体爬虫
+
 https://github.com/NanmiCoder/MediaCrawler
 
 **小红书爬虫**，**抖音爬虫**， **快手爬虫**， **B站爬虫**， **微博爬虫**...。
 目前能抓取小红书、抖音、快手、B站、微博的视频、图片、评论、点赞、转发等信息。
 
 原理：利用[playwright](https://playwright.dev/)搭桥，保留登录成功后的上下文浏览器环境，通过执行JS表达式获取一些加密参数 通过使用此方式，免去了复现核心加密JS代码，逆向难度大大降低
+
+
+
+## 微信
+
+https://github.com/LC044/WeChatMsg
+
+
+
+## 抖音视频直播
+
+
+
+
+
+## MongoDB
+
+教程
+
+https://www.bilibili.com/video/BV16u4y1y7Fm/?spm_id_from=333.337.search-card.all.click&vd_source=dbfbd2872facf9ea60b8e6ab59de8c48
+
+
+
+![image-20240523181903311](projects.assets/image-20240523181903311.png)
+
+08PQi5Vx8ZaRyAWw
+
+
+
+```bash
+mongosh "mongodb+srv://cluster0.chmpdxv.mongodb.net/" --apiVersion 1 --username lzhdelife --password 08PQi5Vx8ZaRyAWw
+```
 
 
 
@@ -57,6 +197,16 @@ https://github.com/barry-ran/werobot
 - 电影搜索
 - 图片转文字
 - 技术文章
+
+
+
+# 服务器
+
+Linux服务器管理面板
+
+https://github.com/1Panel-dev/1Panel
+
+
 
 # 区块链
 
