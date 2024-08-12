@@ -24,6 +24,20 @@ ping baidu.com
 
 
 
+## 重装系统
+
+1.下载Ubuntu系统
+
+https://ubuntu.com/download/alternative-downloads
+
+desktop iso镜像
+
+2.用rugus软件制作U盘启动盘
+
+3.在服务器上安装
+
+4.新电脑配置
+
 
 
 # WSL
@@ -66,6 +80,188 @@ https://zhuanlan.zhihu.com/p/461802189
 
 
 
+# linux运维
+
+关闭有线网络，保留WIFI
+
+## 管理面板
+
+宝塔面板
+
+Input:
+
+```bash
+sudo bt default
+```
+
+Output:
+
+```
+
+==================================================================
+BT-Panel default info!
+==================================================================
+外网面板地址: http://116.7.245.186:38199/9ea09f6e
+内网面板地址: http://192.168.31.144:38199/9ea09f6e
+username: 5aeeguhx
+password: 6759829b
+Warning:
+If you cannot access the panel,
+release the following port (8888|888|80|443|20|21) in the security group
+注意：初始密码仅在首次登录面板前能正确获取，其它时间请通过 bt 5 命令修改密码
+==================================================================
+
+```
+
+
+
+1panel
+
+```
+
+[1Panel Log]:
+[1Panel Log]: =================感谢您的耐心等待，安装已经完成==================
+[1Panel Log]:
+[1Panel Log]: 请用浏览器访问面板:
+[1Panel Log]: 外网地址: http://116.7.245.188:14003/73975ab2db
+[1Panel Log]: 内网地址: http://192.168.31.144:14003/73975ab2db
+[1Panel Log]: 面板用户: 4a98e7279a
+[1Panel Log]: 面板密码: 3e2bf90999
+[1Panel Log]:
+[1Panel Log]: 项目官网: https://1panel.cn
+[1Panel Log]: 项目文档: https://1panel.cn/docs
+[1Panel Log]: 代码仓库: https://github.com/1Panel-dev/1Panel
+[1Panel Log]:
+[1Panel Log]: 如果使用的是云服务器，请至安全组开放 14003 端口
+[1Panel Log]:
+[1Panel Log]: 为了您的服务器安全，在您离开此界面后您将无法再看到您的密码，请务必牢记您的密码。
+[1Panel Log]:
+[1Panel Log]: ================================================================
+
+```
+
+重启
+
+```bash
+1pctl restart
+```
+
+
+
+
+
+### WSL
+
+
+
+
+
+## 防火墙
+
+在局域网内一直不能被我的主机访问，试了很多次打开`ufw`和`iptable`都不行
+
+后来查询了一下使用的是什么防火墙
+
+```bash
+sudo systemctl list-units --type=service | grep -i 'firewall\|ufw\|iptables'
+```
+
+根据输出，可以判断系统上正在运行的防火墙服务。
+
+```
+firewalld.service                                     loaded active running firewalld - dynamic firewall daemon                                                                                             
+  ufw.service                                           loaded active exited  Uncomplicated firewall     
+```
+
+才发现用的是`firewalld`，把它禁止了就能连了
+
+这个防火墙比`ufw`更专业，新手用`ufw`
+
+### 常用命令
+
+**启用防火墙**：
+
+```
+sudo ufw enable
+```
+
+**禁用防火墙**：
+
+```
+sudo ufw disable
+```
+
+**查看防火墙状态**：
+
+```
+sudo ufw status
+```
+
+**允许特定端口的进入流量**：
+
+```
+sudo ufw allow <port_number>
+```
+
+**允许特定协议和端口的进入流量**：
+
+```
+sudo ufw allow <port_number>/<protocol>
+```
+
+例如，允许 TCP 协议的 80 端口：
+
+```
+sudo ufw allow 80/tcp
+```
+
+**允许特定 IP 地址的进入流量**：
+
+```
+sudo ufw allow from <IP_address>
+```
+
+**允许特定 IP 地址的特定端口进入流量**：
+
+```
+sudo ufw allow from <IP_address> to any port <port_number>
+```
+
+**拒绝特定端口的进入流量**：
+
+```
+sudo ufw deny <port_number>
+```
+
+**删除特定规则**：
+
+```
+sudo ufw delete <rule_number>
+```
+
+可以通过 `sudo ufw status numbered` 命令查看规则编号。
+
+**重置所有规则为默认设置**：
+
+```
+sudo ufw reset
+```
+
+**查看详细信息**：
+
+```
+sudo ufw show listening
+```
+
+### iptables
+
+- `iptables` 是一个用于配置内核防火墙的工具，没有自己的守护进程或服务。
+- 通过运行 `sudo iptables -L` 查看当前配置的防火墙规则。
+- 使用 `sudo iptables -L -v -n` 获取详细的规则信息。
+- 检查 `netfilter-persistent` 或 `iptables-persistent` 服务来查看规则是否在系统启动时加载。
+
+通过这些方法，你可以确认 `iptables` 是否正在配置和使用中。
+
 # Windows for Android
 
 视频教程
@@ -93,6 +289,22 @@ https://github.com/MustardChef/WSABuilds/releases/download/Windows_11_2307.40000
 2.使用WSATools安装Clash的apk文件，翻墙后才能登录谷歌
 
 
+
+# 姿态检测
+
+openpose
+
+仓库：https://github.com/Hzzone/pytorch-openpose
+
+博客：https://blog.csdn.net/liaoqingjian/article/details/115366866?utm_source=app&app_version=4.15.0&code=app_1562916241&uLinkId=usr1mkqgl919blen
+
+
+
+轻量算法
+
+仓库：https://github.com/Daniil-Osokin/lightweight-human-pose-estimation.pytorch?tab=readme-ov-file
+
+视频：https://www.youtube.com/watch?v=4wlJ-JPFog4
 
 # 爬虫
 
